@@ -1,0 +1,35 @@
+﻿@page
+@model SearchModel
+@{
+    ViewData["Title"] = "Search Document";
+}
+
+<div class="text-lg-start header">
+    <h3>Search your documents</h3>
+</div>
+
+<div class="main-container">
+    <div class="chat-container" id="chatContainer">
+        @foreach(string key in Model.ConversationHistory.Keys)
+        {
+            @if(key == "userInput")
+            {
+                <div class="user-message">@Model.ConversationHistory[key]</div>
+            }
+            else
+            {
+                <div class="bot-message">@Model.ConversationHistory[key]</div>
+            }
+        }
+    </div>
+    <form method="post" id="chat-form">
+        <div class="textbox-container">
+            <input type="text" name="chatInput" id="chatInput" class="form-control" placeholder="Type your message...">
+
+            <button type="submit" class="chat-button" title="Chat">
+                <i class="fas fa-comment"></i> <!-- Chat icon -->
+            </button>
+        </div>
+    </form>
+
+</div>

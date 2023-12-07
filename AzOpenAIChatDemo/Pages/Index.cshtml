@@ -1,0 +1,58 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+<hr />
+
+<div>
+    <div class="text-lg-start">
+        <h3>File Upload</h3>
+    </div>
+    <div class="row">
+        <div class="col-md-6 mb-3 mt-3" style="border: 1px solid grey;">
+            <form method="post" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label class="form-label">Upload File</label>
+                    <input type="file" name="file" class="form-control" />
+                </div>
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-primary">Upload</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-6 mb-3 mt-3 border-light">
+            <h6>List of Uploaded Files:</h6>
+            <p>
+                @foreach(string item in Model.UploadedFileNames)
+                {
+                    <span>@item</span>
+                    <br/>
+                }
+            </p>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="msgModal" tabindex="-1" aria-labelledby="msgModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="msgModalLabel">Info</h1>
+            </div>
+            <div class="modal-body">
+               @Model.StatusMessage
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+@if(!string.IsNullOrEmpty(Model.StatusMessage))
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            $("#msgModal").modal("show")
+        };
+    </script>
+}
